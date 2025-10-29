@@ -27,7 +27,8 @@ Explicação da lógica (passo a passo):
 
 Por que o algoritmo guloso não garante solução ótima?
 A estratégia gulosa toma decisões locais (usar sempre a maior moeda possível naquele momento) sem considerar efeitos futuros. Em alguns sistemas de moedas (por exemplo, o sistema monetário canônico como [1,5,10,25] em que o guloso funciona para moedas típicas), o guloso produz sempre o ótimo. Porém, para conjuntos arbitrários de moedas, a escolha local ótima pode bloquear combinações melhores que usam mais moedas médias em vez de uma moeda grande + várias pequenas.
-Caso de falha (ilustrado)
+<br>
+Caso de falha (ilustrado):
 <ul>
   <li>Moedas: [1, 3, 4]</li>
   <li>Montante: M = 6</li>
@@ -44,6 +45,7 @@ Solução ótima:
   <li>Usa duas moedas 3 → total moedas = 2 (3 + 3)</li>
 </ul>
 Logo, guloso -> 3 moedas (pior), ótimo -> 2 moedas.
+<br>
 Observações finais:
 <ul>
   <li>A função é simples e rápida para muitos casos práticos, e é uma boa heurística inicial.</li>

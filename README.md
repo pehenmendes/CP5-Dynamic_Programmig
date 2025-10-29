@@ -1,4 +1,4 @@
-# CP5-Dynamic_Programmig
+# CP5 Dynamic Programmig
 ## Integrantes:
 - Pedro Henrique MS (RM555332)
 - Kayky Stilliano (RM555148)

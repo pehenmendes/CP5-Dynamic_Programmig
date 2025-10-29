@@ -328,3 +328,32 @@ $$O(M)$$
 <br>
 
 # 3) Conclusão
+Resumo Comparativo das Abordagens
+<br>
+| **Abordagem** | **Tipo de Implementação**           | **Estratégia**                               | **Complexidade de Tempo (O)** | **Complexidade Melhor Caso (Ω)** | **Complexidade Média (Θ)** | **Ótima em Todos os Casos?** |
+| ------------- | ----------------------------------- | -------------------------------------------- | ----------------------------- | -------------------------------- | -------------------------- | ---------------------------- |
+| **Função 1**  | Iterativa                           | Estratégia Gulosa                            | O(n log n)                    | Ω(n)                             | Θ(n)                       | ❌ Não                        |
+| **Função 2**  | Recursiva Pura                      | Exploração Total (Brute Force)               | O(2^M)                        | Ω(M)                             | Θ(2^M)                     | ✅ Sim (mas ineficiente)      |
+| **Função 3**  | Recursiva com Memoização (Top-Down) | Programação Dinâmica (cache de subproblemas) | O(M × n)                      | Ω(n)                             | Θ(M × n)                   | ✅ Sim                        |
+| **Função 4**  | Programação Dinâmica (Bottom-Up)    | Tabela iterativa (resolução incremental)     | O(M × n)                      | Ω(M × n)                         | Θ(M × n)                   | ✅ Sim                        |
+
+🔹 n: número de tipos de moedas
+🔹 M: montante a ser formado
+
+Escolha Ótima:
+<br>
+A abordagem mais eficiente e robusta para resolver o Problema da Troca de Moedas é a Programação Dinâmica (Bottom-Up).
+<ul>
+  <li>Assim como a versão com memoização (Top-Down), ela garante o resultado ótimo em todos os casos.</li>
+  <li>No entanto, a versão Bottom-Up evita a sobrecarga de chamadas recursivas e o custo de gerenciamento da pilha, o que a torna ligeiramente mais rápida e mais estável para grandes valores de M.</li>
+  <li>Em contrapartida, a versão Top-Down é mais intuitiva e fácil de implementar, sendo excelente para aprendizado e análise conceitual da técnica.</li>
+</ul>
+
+Portanto, a Função 4 (PD Bottom-Up) representa o melhor equilíbrio entre eficiência, previsibilidade e escalabilidade.
+
+Reflexão Final:
+<br>
+O Problema da Troca de Moedas é um exemplo clássico de problema de otimização com subestrutura ótima e subproblemas sobrepostos — características fundamentais para a aplicação de Programação Dinâmica (PD).
+A PD permite transformar algoritmos exponenciais e ineficientes em soluções polinomiais, por meio do armazenamento e reaproveitamento de resultados parciais.
+Essa técnica elimina o reprocessamento redundante e garante soluções ótimas em tempo viável, mesmo para entradas grandes.
+Mais do que uma ferramenta matemática, a Programação Dinâmica representa uma forma de pensar sistematicamente: quebrar um grande problema em partes menores, resolver cada parte de maneira ótima e combinar essas soluções para formar a resposta global.

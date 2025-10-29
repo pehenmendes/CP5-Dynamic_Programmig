@@ -5,8 +5,6 @@
   <li>Kayky Stiliano (RM 555148)</li>
 </ul>
 
-<br>
-
 # 1. Introdução e Contextualização do Problema
 ## O Problema da Troca de Moedas (Coin Change Problem)
 ### Contextualização

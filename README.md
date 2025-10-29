@@ -1,19 +1,90 @@
-# CP5 - Dynamic Programming
-
+# CP5-Dynamic_Programmig
 ## Integrantes:
-<ul>
-  <li>Kayky Silva Stiliano (RM555148)</li>
-  <li>Pedro Henrique Mendes (RM555332)</li>
-</ul>
+- Pedro Henrique MS (RM555332)
+- Kayky Stilliano (RM555148)
 
 <br>
 
-## 1) Introdução e Contextualização do Problema
-...
+# 1. Introdução e Contextualização do Problema
+## O Problema da Troca de Moedas (Coin Change Problem)
+### Contextualização
+O Problema da Troca de Moedas é um dos problemas clássicos da computação e da matemática aplicada, amplamente utilizado para ilustrar conceitos de recursão e programação dinâmica.
 
-## 2) Análise Detalhada das Abordagens
+O objetivo principal é determinar a menor quantidade de moedas necessárias para formar um determinado montante (M), utilizando um conjunto de moedas com valores pré-definidos.
 
-### Função 1 - Iterativa (estratégia gulosa)
+As premissas básicas são:
+- Cada moeda possui um valor inteiro positivo (ex.: 1, 2, 5, 10...);
+- Existe uma quantidade ilimitada de cada tipo de moeda disponível;
+- O montante M a ser formado também é um número inteiro positivo;
+- O resultado deve ser a quantidade mínima de moedas que somam exatamente o montante.
+- Caso não seja possível formar o montante com as moedas disponíveis, a função deve indicar essa impossibilidade (por exemplo, retornando ```-1``` ou ```∞```).
+
+### Exemplo ilustrativo
+Suponha um conjunto de moedas ```moedas = [1, 3, 4]``` e um montante ```M = 6```.  
+As possíveis combinações são:
+- ```1 + 1 + 1 + 1 + 1 + 1 = 6``` → 6 moedas
+- ```3 + 3 = 6``` → 2 moedas (ótima)
+- ```4 + 1 + 1 = 6``` → 3 moedas
+
+A solução ótima é a segunda opção, pois utiliza a menor quantidade de moedas.
+
+---
+### Natureza do Problema
+O Coin Change é classificado como um Problema de Otimização, pois busca minimizar uma medida de custo — neste caso, o número total de moedas utilizadas.
+
+O objetivo não é apenas encontrar uma combinação possível, mas sim a melhor combinação possível entre muitas alternativas.
+
+Assim, entre todas as soluções válidas (que somam M), queremos aquela que minimiza o número de moedas utilizadas, o que o caracteriza como um problema de otimização combinatória.
+
+---
+## Definição de Programação Dinâmica (PD)
+### Conceito
+A Programação Dinâmica (PD) é uma técnica de resolução de problemas que se baseia na divisão de um problema complexo em subproblemas menores, resolvendo cada um apenas uma vez e armazenando seus resultados para uso posterior.
+
+Essa técnica é aplicada quando:
+- O problema pode ser dividido em subproblemas menores e independentes, e
+- Esses subproblemas são reutilizados várias vezes ao longo do processo de resolução.
+
+A PD tem dois pilares conceituais fundamentais: Subestrutura Ótima e Subproblemas Sobrepostos.
+
+---
+### Subestrutura Ótima
+
+Um problema possui subestrutura ótima quando a solução ótima global pode ser construída a partir das soluções ótimas dos subproblemas menores.
+
+No Coin Change, por exemplo:
+
+>Para calcular o número mínimo de moedas para formar um valor M, basta conhecer o número mínimo de moedas para os valores ```M - moeda[i]``` (para cada moeda disponível).
+
+Matematicamente:
+
+$$f(M) = \min_{\text{moeda} \in \text{moedas}} (1 + f(M - \text{moeda}))$$
+
+Ou seja, a melhor solução para ```M``` depende diretamente das melhores soluções para montantes menores — caracterizando a subestrutura ótima.
+
+---
+### Subproblemas Sobrepostos
+
+Um problema apresenta subproblemas sobrepostos quando o mesmo subproblema é resolvido diversas vezes durante a execução do algoritmo.
+
+No caso da versão recursiva do Coin Change:
+- Para calcular ```f(6)```, é necessário ```f(5)```, ```f(3)``` e ```f(2)```.
+- Para calcular ```f(5)```, também se calcula ```f(4)```, ```f(2)``` e ```f(1)```.
+- Assim, ```f(2)``` e ```f(3)``` são recalculados múltiplas vezes — o que leva à explosão combinatória.
+
+A Programação Dinâmica (PD) elimina essa redundância armazenando os resultados de cada subproblema em uma tabela (ou vetor ```dp```), de forma que, quando o mesmo subproblema for necessário novamente, o valor é apenas consultado, e não recomputado.
+
+---
+## Conclusão da Seção
+
+O Problema da Troca de Moedas é um exemplo clássico de problema de otimização com subproblemas sobrepostos, o que o torna ideal para ser resolvido com Programação Dinâmica.
+A abordagem recursiva simples é útil para compreensão conceitual, mas ineficiente.
+Já a PD, seja Top-Down (com memoização) ou Bottom-Up (iterativa), fornece uma solução eficiente e escalável, garantindo o menor número de moedas de forma sistemática.
+
+<br>
+
+# 2. Análise Detalhada das Abordagens
+## Função 1 - Iterativa (estratégia gulosa)
 Explicação da lógica (passo a passo):
 <ul>
   <li>Filtramos moedas inválidas (<=0) e garantimos que temos tipos válidos.</li>
@@ -53,10 +124,68 @@ Observações finais:
   <li>Retornei -1 quando é impossível formar o montante exatamente; outra opção seria float('inf') para uso interno, mas -1 é mais interpretável no output final.</li>
 </ul>
 
-### Função 2 - Recursiva Pura (sem memoização)
-...
+## Função 2 - Recursiva Pura (sem memoização)
+### Conceito
 
-### Função 3 - Recursiva com Memoização (Top Down)
+A abordagem recursiva pura resolve o problema da troca de moedas tentando todas as combinações possíveis de moedas.  
+Para cada moeda disponível, o algoritmo chama a si mesmo recursivamente para resolver o subproblema de valor ```M - moeda```.
+
+Ou seja:
+
+>“Para formar o montante M, experimente usar cada moeda e veja qual combinação resulta no menor número total de moedas.”
+
+A função é sem otimizações, ou seja, recalcula os mesmos subproblemas diversas vezes.
+
+---
+### Análise de Desempenho
+#### Árvore de Recursão — Exemplo prático
+
+Considere moedas = ```[1, 3, 4]``` e ```M = 6```.
+
+A primeira chamada tenta todas as possibilidades:
+
+![Árvore Recursiva](Arvore_Recursiva.png)
+
+Observe:
+- O nó ```troco(3)``` aparece mais de uma vez (por exemplo, ao calcular ```troco(6)``` e ```troco(5)```).
+- O mesmo ocorre com ```troco(2)``` e ```troco(1)``` — subproblemas sobrepostos.
+
+Assim, a função recalcula repetidamente o mesmo resultado em ramos diferentes da árvore.
+
+---
+#### Reprocessamento dos Subproblemas
+
+Por exemplo:
+- ```troco(3)``` é resolvido várias vezes, embora o resultado seja sempre o mesmo.
+- Se ```troco(3)``` levar 4 chamadas internas, e ele for invocado 5 vezes, já são 20 chamadas só para esse subproblema.
+
+Esse reprocessamento é a principal causa da ineficiência.
+
+---
+#### Por que é Exponencial?
+
+A cada chamada, o algoritmo abre novas ramificações iguais ao número de moedas disponíveis.
+Logo, se temos n tipos de moedas e montante M, o número de chamadas pode crescer até cerca de:
+
+$$O(n^M)$$
+
+ou mais comumente representado como:
+
+$$O(2^M)$$
+
+Essa explosão combinatória ocorre porque o algoritmo não “lembra” resultados anteriores.
+
+---
+#### Conclusão Prática
+- Vantagem: Implementação simples e direta.
+- Desvantagem: Cresce exponencialmente → inaceitável para M > 30 (pode levar minutos ou horas).
+- Complexidade:
+    - Tempo: ```O(2^M)```
+    - Espaço: ```O(M)``` (profundidade da recursão)
+
+<br>
+
+## Função 3 - Recursiva com Memoização (Top Down)
 Explicação da lógica (passo a passo):
 <ul>
   <li>A função tenta resolver o problema de formar o montante M a partir das moedas disponíveis, de forma recursiva: para cada moeda, ela tenta resolver o subproblema M - moeda.</li>
@@ -130,8 +259,72 @@ Caso médio (Θ):
 </ul>
 <br>
 
-### Função 4 - Usando Programação Dinâmica (Bottom up)
-...
+## Função 4 - Usando Programação Dinâmica (Bottom up)
+### Conceito
 
-## 3) Conclusão
-...
+A Programação Dinâmica (PD) evita o reprocessamento criando um vetor auxiliar ```dp```, onde:
+
+>```dp[i]``` representa a menor quantidade de moedas necessárias para formar o montante ```i```.
+
+Assim, cada resultado é calculado apenas uma vez e armazenado para uso posterior.
+
+---
+### O que o vetor dp armazena
+
+Exemplo: ```moedas = [1, 3, 4]``` e ```M = 6```
+
+| i (montante) | dp[i] (menor nº de moedas) | Combinação possível |
+|:------------:|:--------------------------:|:-------------------:|
+| 0            | 0                          | -                   |
+| 1            | 1                          | [1]                 |
+| 2            | 2                          | [1, 1]              |
+| 3            | 1                          | [3]                 |
+| 4            | 1                          | [4]                 |
+| 5            | 2                          | [4, 1]              |
+| 6            | 2                          | [3, 3]              |
+
+O vetor cresce de baixo para cima, calculando do ```dp[0]``` até ```dp[M]```.
+
+---
+### Fluxo do Algoritmo (Construção Iterativa)
+
+Para cada valor ```i``` de ```1``` até ```M```, o algoritmo:
+1. Percorre todas as moedas disponíveis.
+2. Se a moeda for menor ou igual a ```i```, verifica ```dp[i - moeda] + 1```.
+3. Guarda o mínimo encontrado em ```dp[i]```.
+
+Assim:
+>A solução para ```i``` depende das soluções já calculadas para montantes menores ```(i - moeda)```.
+
+---
+### Vantagem sobre o Top-Down (com memoização)
+- Top-Down (Recursivo com cache): ainda faz chamadas recursivas → maior sobrecarga de pilha e chamadas de função.
+- Bottom-Up (Iterativo): calcula tudo em laço simples → mais rápido na prática, pois evita recursões e chamadas de função.
+
+Para grandes valores de ```M```, o Bottom-Up costuma ter melhor desempenho constante (menor overhead).
+
+---
+### Complexidade
+- **Tempo**:  
+Cada valor ```i``` (de 1 a M) testa todas as ```n``` moedas →  
+$$O(M×n)$$
+- **Melhor caso**:  
+Mesmo que existam moedas que coincidam exatamente com o valor, ainda percorremos o vetor →
+$$Ω(M×n)$$
+- **Espaço**:  
+Apenas um vetor de tamanho ```M + 1``` →
+$$O(M)$$
+
+---
+### Conclusão Prática
+| Critério                | Recursiva Pura       | Programação Dinâmica (Bottom-Up) |
+| ----------------------- | -------------------- | -------------------------------- |
+| Reprocessa subproblemas | Sim                  | Não                              |
+| Complexidade de tempo   | Exponencial `O(2^M)` | Linear em M e n → `O(M×n)`       |
+| Espaço                  | O(M)                 | O(M)                             |
+| Escalabilidade          | Fraca                | Excelente                        |
+| Indicado para           | Ensino/Teoria        | Aplicações reais                 |
+
+<br>
+
+# 3) Conclusão

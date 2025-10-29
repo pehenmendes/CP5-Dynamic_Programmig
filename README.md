@@ -11,8 +11,6 @@
 ## 1) Introdução e Contextualização do Problema
 ...
 
-<br>
-
 ## 2) Análise Detalhada das Abordagens
 
 ### Função 1 - Iterativa (estratégia gulosa)
@@ -133,8 +131,6 @@ Caso médio (Θ):
 
 ### Função 4 - Usando Programação Dinâmica (Bottom up)
 ...
-
-<br>
 
 ## 3) Conclusão
 ...

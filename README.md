@@ -69,6 +69,7 @@ Explicação da lógica (passo a passo):
 </ul>
 
 Conceito:
+<br>
 A Memoização é uma técnica que consiste em armazenar os resultados de subproblemas já resolvidos para evitar cálculos repetidos.
 Na recursão pura, cada chamada pode recalcular os mesmos valores várias vezes (por exemplo, qtdeMoedas(4) pode ser resolvida repetidamente em diferentes ramos da árvore recursiva).
 Com a memoização, esses resultados ficam salvos em um cache (dicionário memo), e sempre que o mesmo montante M é solicitado novamente, a função retorna o valor diretamente desse cache — sem refazer toda a recursão.

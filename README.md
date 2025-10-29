@@ -112,6 +112,7 @@ Onde:
 </ul>
 Cada subproblema é resolvido apenas uma vez e, para cada um, percorremos todas as moedas disponíveis.
 <br>
+<br>
 Espaço:
 <ul>
   <li>O(M) devido ao dicionário de memoização e à pilha de recursão.</li>

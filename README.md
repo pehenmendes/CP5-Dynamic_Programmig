@@ -44,6 +44,7 @@ Solução ótima:
 </ul>
 Logo, guloso -> 3 moedas (pior), ótimo -> 2 moedas.
 <br>
+<br>
 Observações finais:
 <ul>
   <li>A função é simples e rápida para muitos casos práticos, e é uma boa heurística inicial.</li>
